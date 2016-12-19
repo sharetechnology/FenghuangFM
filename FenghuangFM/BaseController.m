@@ -18,6 +18,12 @@
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = Hex(0xf3f3f3);
+    
+    /*
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    */
 }
 
 - (void)viewWillAppear:(BOOL)animated {

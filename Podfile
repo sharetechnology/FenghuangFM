@@ -9,4 +9,5 @@ pod 'DZNEmptyDataSet'
 pod 'YYText'
 pod 'FMDB'
 pod 'MMDrawerController', '~> 0.5.7'
+pod 'FDFullscreenPopGesture', '~> 1.1'
 end
