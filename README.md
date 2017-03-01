@@ -60,4 +60,33 @@ MainFeatureViewModel.m
 ```
 
 ### MVVM
-...
+
+MVVM解放了MVC框架中繁杂庞大的ViewController。原来的ViewController中包含了"Views+业务"，现在MVVM使用ViewModel将业务这部分转移了出来，瞬间使ViewController的体量降了下来。看一下主页用到的一个ViewModel:
+
+MainFeatureViewModel.h
+
+```
+@interface MainFeatureViewModel : NSObject
+
+@property (nonatomic, readonly) RACSignal                   *updateContentSignal;
+
+@property (nonatomic, strong)   MainFeatureModel            *featureModel;
+
+@property (nonatomic, strong)   RecommendModel              *recommendModel;
+
+- (void)refreshDataSource;
+
+- (NSInteger)numberOfSections;
+- (NSInteger)numberOfItemsInSection:(NSInteger)section;
+- (CGFloat)heightForRowAtIndex:(NSIndexPath *)indexPath;
+
+@end
+
+```
+
+数据模型MainFeatureModel和RecommendModel相关的操作脱离了VC转移到了这里，在MainFeatureController中，只要通过viewModel属性就可以获取到数据。
+
+```
+@property (nonatomic, strong)   MainFeatureViewModel    *viewModel;
+```
+
