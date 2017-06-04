@@ -1,7 +1,7 @@
 # FenghuangFM
 仿凤凰FM iOS客户端
 
-![image](https://github.com/BJTU-HT.github.io/images/fenghuangFM_01.gif)
+![Image text](https://raw.githubusercontent.com/tom555cat/pictures/master/FenghuangFM.png)
 
 仿凤凰FM iOS客户端是出于3个目的 1>理解网络请求 2>理解reactiveCocoa 3>理解MVVM
 
