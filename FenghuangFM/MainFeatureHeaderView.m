@@ -8,13 +8,15 @@
 
 #import "MainFeatureHeaderView.h"
 #import "UIImageView+YYWebImage.h"
+#import "FHNotification.h"
+#import "MainFeatureHelper.h"
 
 @interface MainFeatureHeaderView () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIScrollView  *scrollView;
-
-@property (nonatomic, strong) NSTimer       *timer;
-
+    
+@property (nonatomic, assign) double headerWith;
+    
 @end
 
 @implementation MainFeatureHeaderView
@@ -24,52 +26,51 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.scrollView];
-        [self addTimer];
+        //[self addTimer];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(timerChanged) name:kNotificationMainFeatureHeaderTimer object:nil];
+        
+        _headerWith = screenWidthPCH - 20;
     }
     return self;
 }
+    
+- (void)timerChanged {
+    if (!_model) {
+        return;
+    }
+    
+    NSInteger curIndex = self.scrollView.contentOffset.x / (_headerWith);
+    [self.scrollView setContentOffset:CGPointMake((curIndex + 1)* _headerWith, 0) animated:YES];
+}
 
 #pragma mark - Private
-
-- (void)addTimer
-{
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(scrollToNext) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    self.timer = timer;
-}
-
-- (void)removeTimer
-{
-    [self.timer invalidate];
-    self.timer = nil;
-}
 
 - (void)scrollToNext
 {
     if (!_model) {
         return;
     }
-    NSInteger curIndex = self.scrollView.contentOffset.x / screenWidthPCH;
-    [self.scrollView setContentOffset:CGPointMake((curIndex +1) * screenWidthPCH, 0) animated:YES];
+    NSInteger curIndex = self.scrollView.contentOffset.x / _headerWith;
+    [self.scrollView setContentOffset:CGPointMake((curIndex +1) * _headerWith, 0) animated:YES];
 }
 
 #pragma mark - ScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSInteger curPage = self.scrollView.contentOffset.x / screenWidthPCH;
-    if (curPage == self.model.data.count) {
+    NSInteger curPage = self.scrollView.contentOffset.x / _headerWith;
+    if(curPage == self.model.data.count) {
         [self.scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
     }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self removeTimer];
+    [[MainFeatureHelper helper] destoryHeaderTimer];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self addTimer];
+    [[MainFeatureHelper helper] startHeadTimer];
 }
 
 #pragma mark - Getter & Setter
@@ -83,6 +84,9 @@
         _scrollView.scrollEnabled = YES;
         _scrollView.bounces = YES;
         _scrollView.pagingEnabled = YES;
+        _scrollView.bouncesZoom = YES;
+        _scrollView.delaysContentTouches = YES;
+        _scrollView.canCancelContentTouches = YES;
     }
     return _scrollView;
 }
@@ -95,13 +99,13 @@
         [view removeFromSuperview];
     }
     
-    _scrollView.contentSize = CGSizeMake(screenWidthPCH * _model.data.count, 150);
+    _scrollView.contentSize = CGSizeMake(_headerWith * _model.data.count, 150);
     for (NSInteger index = 0; index <= _model.data.count; index++) {
         
         ActivityModel *activityModel = index == _model.data.count ? _model.data.firstObject : [_model.data objectAtIndex:index];
         
         UIImageView *imageView = [[UIImageView alloc] init];
-        imageView.frame = CGRectMake(screenWidthPCH * index, 0, screenWidthPCH, self.frame.size.height);
+        imageView.frame = CGRectMake(_headerWith * index, 0, _headerWith, self.frame.size.height);
         [imageView yy_setImageWithURL:[NSURL URLWithString:activityModel.img640_292] options:YYWebImageOptionSetImageWithFadeAnimation];
         
         [_scrollView addSubview:imageView];

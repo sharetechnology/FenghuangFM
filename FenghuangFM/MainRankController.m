@@ -26,11 +26,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBar.translucent = YES;
+    
     @weakify(self);
     [self.viewModel.updateContentSignal subscribeNext:^(id x) {
         @strongify(self);
         [self.tableView reloadData];
     }];
+}
+    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

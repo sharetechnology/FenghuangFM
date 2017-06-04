@@ -14,6 +14,7 @@
 #import "FeatureSpecialCell.h"
 #import "FeatureNormalCell.h"
 #import "HotRecNewController.h"
+#import "MainFeatureHelper.h"
 
 #define kTableHeaderHeight    180.0
 
@@ -36,9 +37,17 @@
         @strongify(self);
         [self.tableView reloadData];
         self.headerView.model = self.viewModel.featureModel;
+        
+        [[MainFeatureHelper helper] startHeadTimer];
     }];
     
     [self.viewModel refreshDataSource];
+}
+    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)transToHotRecNewController:(MoreType)type

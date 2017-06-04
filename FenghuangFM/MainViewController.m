@@ -14,7 +14,9 @@
 
 @interface MainViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, SubTitleViewDelegate>
 
-@property (nonatomic, strong) SubTitleView *subTitleView;
+@property (weak, nonatomic) IBOutlet SubTitleView *subTitleView;
+
+//@property (nonatomic, strong) SubTitleView *subTitleView;
 
 @property (nonatomic, strong) NSMutableArray *subTitleArray;
 
@@ -30,20 +32,37 @@
     self.navigationItem.title = @"凤凰FM";
     [super viewDidLoad];
     [self configNavigationBar];
-    [self.view addSubview:self.subTitleView];
+    self.subTitleView.delegate = self;
+    self.subTitleView.titleArray = self.subTitleArray;
+    //[self.view addSubview:self.subTitleView];
     [self configSubViews];
+    
+    [self.view addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+}
+    
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"frame"]) {
+        NSLog(@"view frame orgin x:%f, y:%f", self.view.frame.origin.x, self.view.frame.origin.y);
+        if (self.view.frame.origin.y == 0) {
+            CGRect rect = self.view.frame;
+            self.view.frame = CGRectMake(0, 64, rect.size.width, rect.size.height);
+        }
+    }
 }
 
 #pragma mark - private
 
 - (void)configSubViews
 {
+    self.pageViewController.view.frame = CGRectMake(0, 40, screenWidthPCH, screenHeightPCH - 40);
+    /*
     [self.pageViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.subTitleView.mas_bottom);
         make.left.mas_equalTo(self.view.mas_left);
         make.right.mas_equalTo(self.view.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
+     */
 }
 
 - (NSInteger)indexForViewController:(UIViewController *)controller {
@@ -162,24 +181,27 @@
 /**
  *  子标题
  **/
+    /*
 - (SubTitleView *)subTitleView
 {
     if (!_subTitleView) {
         _subTitleView = [[SubTitleView alloc] initWithFrame:CGRectMake(0, 0, screenWidthPCH, 40)];
-        _subTitleView.delegate = self;
-        /*
+        
+        
         [_subTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(screenWidthPCH, 40));
-            make.top.mas_equalTo(self.view.mas_top);
+            make.top.mas_equalTo(self.mas_topLayoutGuide);
             make.left.mas_equalTo(self.view.mas_left);
             make.right.mas_equalTo(self.view.mas_right);
         }];
-         */
         
+        
+        _subTitleView.delegate = self;
         _subTitleView.titleArray = self.subTitleArray;
     }
     return _subTitleView;
 }
+     */
 
 /**
  *  分类标题数组

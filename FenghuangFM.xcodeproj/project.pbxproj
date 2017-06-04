@@ -31,6 +31,8 @@
 		E9421A3F1DD99FE1003C6E34 /* MainFeatureAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E9421A3E1DD99FE1003C6E34 /* MainFeatureAPI.m */; };
 		E9421A431DD9A221003C6E34 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9421A421DD9A221003C6E34 /* BaseRequest.m */; };
 		E94653031DF156480010BDBB /* FHBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94653021DF156480010BDBB /* FHBaseNavigationController.m */; };
+		E956BA1F1EE4465B00D7F8F2 /* MainFeatureHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E956BA1E1EE4465B00D7F8F2 /* MainFeatureHelper.m */; };
+		E956BA231EE4488800D7F8F2 /* FHNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = E956BA221EE4488800D7F8F2 /* FHNotification.m */; };
 		E9585B401DE6B7D30013509C /* AuthorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9585B3E1DE6B7D30013509C /* AuthorCell.m */; };
 		E9585B411DE6B7D30013509C /* AuthorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9585B3F1DE6B7D30013509C /* AuthorCell.xib */; };
 		E9585B451DE6BA330013509C /* FunctionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9585B431DE6BA330013509C /* FunctionCell.m */; };
@@ -124,6 +126,10 @@
 		E9421A421DD9A221003C6E34 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		E94653011DF156480010BDBB /* FHBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHBaseNavigationController.h; sourceTree = "<group>"; };
 		E94653021DF156480010BDBB /* FHBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHBaseNavigationController.m; sourceTree = "<group>"; };
+		E956BA1D1EE4465B00D7F8F2 /* MainFeatureHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFeatureHelper.h; sourceTree = "<group>"; };
+		E956BA1E1EE4465B00D7F8F2 /* MainFeatureHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFeatureHelper.m; sourceTree = "<group>"; };
+		E956BA211EE4488800D7F8F2 /* FHNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FHNotification.h; sourceTree = "<group>"; };
+		E956BA221EE4488800D7F8F2 /* FHNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FHNotification.m; sourceTree = "<group>"; };
 		E9585B3D1DE6B7D30013509C /* AuthorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorCell.h; sourceTree = "<group>"; };
 		E9585B3E1DE6B7D30013509C /* AuthorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorCell.m; sourceTree = "<group>"; };
 		E9585B3F1DE6B7D30013509C /* AuthorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorCell.xib; sourceTree = "<group>"; };
@@ -472,6 +478,24 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		E956BA1C1EE4463200D7F8F2 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E956BA1D1EE4465B00D7F8F2 /* MainFeatureHelper.h */,
+				E956BA1E1EE4465B00D7F8F2 /* MainFeatureHelper.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		E956BA201EE4486100D7F8F2 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				E956BA211EE4488800D7F8F2 /* FHNotification.h */,
+				E956BA221EE4488800D7F8F2 /* FHNotification.m */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
 		E9585B3B1DE6B7310013509C /* AuthorCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -797,6 +821,7 @@
 		E9FC8FCD1DD80B75008CB533 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				E956BA201EE4486100D7F8F2 /* Notification */,
 				E96C100E1DFEB4C200AE3910 /* ScaleScrollView */,
 				E94653001DF1541A0010BDBB /* BaseNavigationController */,
 				E9FC8FD11DD84F78008CB533 /* BaseController */,
@@ -836,6 +861,7 @@
 			children = (
 				E9FC8FDF1DD8582B008CB533 /* MainFeatureController.h */,
 				E9FC8FE01DD8582B008CB533 /* MainFeatureController.m */,
+				E956BA1C1EE4463200D7F8F2 /* Helper */,
 				E9421A291DD987E7003C6E34 /* ViewModel */,
 				E9421A2D1DD98886003C6E34 /* View */,
 				E9421A321DD989DC003C6E34 /* Model */,
@@ -1049,6 +1075,7 @@
 				E9FC8FE41DD8583E008CB533 /* MainTrendController.m in Sources */,
 				E9FBBD3F1DE5392C0027AF53 /* DujiaAPI.m in Sources */,
 				E91155971DFA43BA00341BB1 /* Top100Cell.m in Sources */,
+				E956BA1F1EE4465B00D7F8F2 /* MainFeatureHelper.m in Sources */,
 				E9FC8FE11DD8582B008CB533 /* MainFeatureController.m in Sources */,
 				E9B5568C1DF946F200E99FD3 /* LeaderBoardModel.m in Sources */,
 				E9FC8FAE1DD803ED008CB533 /* main.m in Sources */,
@@ -1070,6 +1097,7 @@
 				E9421A3F1DD99FE1003C6E34 /* MainFeatureAPI.m in Sources */,
 				E9585B4A1DE6BC500013509C /* PlayCell.m in Sources */,
 				E9FC8FEA1DD8586D008CB533 /* MainCategoryController.m in Sources */,
+				E956BA231EE4488800D7F8F2 /* FHNotification.m in Sources */,
 				E9420C041DFE4AA0004A1E14 /* MineHeader.m in Sources */,
 				E9FC8FD71DD8502B008CB533 /* MainBaseController.m in Sources */,
 				E9FBBD471DE580200027AF53 /* ProgramController.m in Sources */,
