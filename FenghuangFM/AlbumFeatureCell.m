@@ -52,8 +52,10 @@
     BdModel *model4 = modelArray[3];
     [_albumFourImageView yy_setImageWithURL:[NSURL URLWithString:model4.img1035_441] options:YYWebImageOptionSetImageWithFadeAnimation];
     
+    /*
     BdModel *model5 = modelArray[4];
     [_albumFiveImageView yy_setImageWithURL:[NSURL URLWithString:model5.img1035_441] options:YYWebImageOptionSetImageWithFadeAnimation];
+     */
 }
 
 + (instancetype)albumFeatureCell:(UITableView *)tableView

@@ -45,7 +45,7 @@
     } else if (indexPath.section == 2 || indexPath.section == 3) {
         return 194;
     } else {
-        return 870;
+        return 710;
     }
 }
 
